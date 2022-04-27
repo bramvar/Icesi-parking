@@ -103,6 +103,7 @@
         android:layout_width="252dp"
         android:layout_height="50dp"
         android:layout_marginBottom="72dp"
+        android:backgroundTint="#33568A"
         android:text="Registrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
