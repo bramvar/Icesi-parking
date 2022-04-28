@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="192dp"
-        android:layout_height="256dp"
+        android:layout_width="211dp"
+        android:layout_height="227dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -48,13 +48,11 @@
         android:id="@+id/loginBtn"
         android:layout_width="239dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="#33568A"
         android:text="Iniciar sesión"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/pwdLoginTextField"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/pwdLoginTextField"
-        app:layout_constraintTop_toBottomOf="@+id/pwdLoginTextField"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintTop_toBottomOf="@+id/pwdLoginTextField" />
 </androidx.constraintlayout.widget.ConstraintLayout>
