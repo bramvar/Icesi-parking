@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "822863545359",
+    "project_id": "icesi-parking",
+    "storage_bucket": "icesi-parking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822863545359:android:cef48682b2d10f7aa34f7a",
+        "android_client_info": {
+          "package_name": "co.edu.icesi.icesiparking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822863545359-mu2m273815arcfo5tvj994kpmu4vs782.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIgj9DA1J7Vxzq5-nvSOaNaTuZQ3nJe5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822863545359-mu2m273815arcfo5tvj994kpmu4vs782.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
