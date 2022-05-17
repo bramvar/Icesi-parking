@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        binding.signUpHyperlink.setOnClickListener {
+            startActivity(Intent(this, SignupActivity::class.java))
+        }
+
         binding.loginBtn.setOnClickListener {
             val email = binding.userLoginTextField.text.toString()
             val password = binding.pwdLoginTextField.text.toString()
