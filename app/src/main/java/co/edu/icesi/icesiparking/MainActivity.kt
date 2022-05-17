@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import co.edu.icesi.icesiparking.databinding.ActivityMainBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,12 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val user1 = User("111222333","Rigoberto","Botina","rigo@berto.com","qwerty123")
-        val user2 = User("000222333","Facundo","La torre","facum@torre.com","qwerty456")
-
-        users.put("rigo@berto.com",user1)
-        users.put("facum@torre.com",user2)
-
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,21 +24,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.loginBtn.setOnClickListener {
-            val i = Intent(this, IntroActivity::class.java)
-            val user = binding.userLoginTextField.text.toString()
+            val email = binding.userLoginTextField.text.toString()
             val password = binding.pwdLoginTextField.text.toString()
-            var currentUser = users.get(user)
 
-            if(currentUser != null){
-                if(user.equals(currentUser.email) and password.equals(currentUser.password)){
-                    startActivity(i)
-                } else{
-                    Toast.makeText(this.baseContext,"Hubo un error. Verifica tu correo o contraseña y vuelve intentarlo", Toast.LENGTH_LONG).show()
+            Firebase.auth.signInWithEmailAndPassword(email,password)
+                .addOnSuccessListener {
+                    val currentUser = Firebase.auth.currentUser
+
+                    Firebase.firestore.collection("users").document(currentUser!!.uid).get()
+                        .addOnSuccessListener {
+                            val user = it.toObject(User::class.java)
+
+                            saveUser(user!!)
+                            startActivity(Intent(this,IntroActivity::class.java))
+                            finish()
+                        }.addOnFailureListener{
+                            Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()
+                        }
                 }
-            } else{
-                Toast.makeText(this.baseContext,"Bad credentials", Toast.LENGTH_LONG).show()
-            }
-
         }
+    }
+    private fun saveUser(user: User){
+        val sp = getSharedPreferences("icesi-parking", MODE_PRIVATE)
+        val json = Gson().toJson(user)
+        sp.edit().putString("user",json).apply()
+
     }
 }
