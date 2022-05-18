@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IcesiParking">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserHomeActivity"
             android:exported="false" />
         <activity
