@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import co.edu.icesi.icesiparking.databinding.ActivityUserHomeBinding
+import co.edu.icesi.icesiparking.model.User
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -59,7 +60,7 @@ class UserHomeActivity : AppCompatActivity() {
         if(json == "NO_USER"){
             return null
         } else{
-            return Gson().fromJson(json,User::class.java)
+            return Gson().fromJson(json, User::class.java)
         }
     }
 }

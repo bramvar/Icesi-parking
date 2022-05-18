@@ -3,11 +3,10 @@ package co.edu.icesi.icesiparking
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import co.edu.icesi.icesiparking.databinding.ActivitySettingsBinding
-import co.edu.icesi.icesiparking.util.UtilDomi
+import co.edu.icesi.icesiparking.model.User
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -82,7 +81,7 @@ class SettingsActivity : AppCompatActivity() {
         if(json == "NO_USER"){
             return null
         } else{
-            return Gson().fromJson(json,User::class.java)
+            return Gson().fromJson(json, User::class.java)
         }
     }
 }

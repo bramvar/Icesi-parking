@@ -1,4 +1,4 @@
-package co.edu.icesi.icesiparking
+package co.edu.icesi.icesiparking.model
 
 data class User (
     var id:String = "",
