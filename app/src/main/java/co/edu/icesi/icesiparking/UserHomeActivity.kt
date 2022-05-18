@@ -3,7 +3,10 @@ package co.edu.icesi.icesiparking
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import co.edu.icesi.icesiparking.adapter.LoteAdapter
 import co.edu.icesi.icesiparking.databinding.ActivityUserHomeBinding
+import co.edu.icesi.icesiparking.model.Lote
 import co.edu.icesi.icesiparking.model.User
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
@@ -15,6 +18,7 @@ class UserHomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserHomeBinding
     private lateinit var user: User
+    private lateinit var adapter: LoteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,10 +26,21 @@ class UserHomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         user = loadUser()!!
-
         binding.userNameTextView.text = user.name+" "+user.surname
-
         getUpdatedUser()
+
+        adapter = LoteAdapter()
+        binding.lotesRecycler.adapter = adapter
+        binding.lotesRecycler.layoutManager = LinearLayoutManager(this)
+        binding.lotesRecycler.setHasFixedSize(true)
+
+        Firebase.firestore.collection("lotes").get()
+            .addOnCompleteListener { lote ->
+                for(doc in lote.result!!){
+                    val lote = doc.toObject(Lote::class.java)
+                    adapter.addLote(lote)
+                }
+            }
 
         binding.userSettingsButton.setOnClickListener {
             startActivity(Intent(this,SettingsActivity::class.java))

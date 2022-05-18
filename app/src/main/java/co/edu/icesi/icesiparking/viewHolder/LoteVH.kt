@@ -6,6 +6,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.icesi.icesiparking.R
 import co.edu.icesi.icesiparking.model.Lote
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class LoteVH(itemView:View): RecyclerView.ViewHolder(itemView) {
 
@@ -27,6 +30,14 @@ class LoteVH(itemView:View): RecyclerView.ViewHolder(itemView) {
             loteState.text = "Disponible"
         }else{
             loteState.text = "Ocupado"
+        }
+
+        //Download image
+        if(lote.imageID != null){
+            Firebase.storage.reference.child("lote-images").child(lote.imageID!!).downloadUrl
+                .addOnSuccessListener {
+                    Glide.with(loteImage).load(it).into(loteImage)
+                }
         }
 
     }
