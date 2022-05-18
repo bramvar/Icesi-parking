@@ -40,7 +40,7 @@ class SignupActivity : AppCompatActivity() {
                 Firebase.auth.createUserWithEmailAndPassword(email,password)
                     .addOnSuccessListener {
                         val id = Firebase.auth.currentUser?.uid
-                        val newUser = User(id!!,userName,userLastname,email,password)
+                        val newUser = User(id!!,userId,userName,userLastname,email,password)
 
                         Firebase.firestore.collection("users").document(id).set(newUser)
                             .addOnSuccessListener {
