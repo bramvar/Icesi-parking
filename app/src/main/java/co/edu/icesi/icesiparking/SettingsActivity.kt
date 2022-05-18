@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import co.edu.icesi.icesiparking.databinding.ActivitySettingsBinding
 import co.edu.icesi.icesiparking.util.UtilDomi
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -26,6 +27,8 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         user = loadUser()!!
+
+        getUpdatedUser()
 
         val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
 
@@ -50,6 +53,26 @@ class SettingsActivity : AppCompatActivity() {
             Firebase.storage.getReference().child("user-image-profile").child(fileName).putFile(uri!!)
             Firebase.firestore.collection("users").document(user.id).update("imageID",fileName)
         }
+    }
+
+    fun getUpdatedUser(){
+        Firebase.firestore.collection("users").document(user.id).get()
+            .addOnSuccessListener {
+                val updatedUser = it.toObject(User::class.java)
+                val imageID = updatedUser?.imageID
+                downloadProfileImage(imageID)
+
+            }
+    }
+
+    fun downloadProfileImage(imageID: String?){
+
+        if(imageID == null) return
+
+        Firebase.storage.getReference().child("user-image-profile").child(imageID!!).downloadUrl
+            .addOnSuccessListener {
+                Glide.with(binding.updateUserImage).load(it).into(binding.updateUserImage)
+            }
     }
 
     fun loadUser(): User?{
