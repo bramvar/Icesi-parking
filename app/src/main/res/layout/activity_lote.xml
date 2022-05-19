@@ -7,7 +7,7 @@
     tools:context=".LoteActivity">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/actLoteImage"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
@@ -25,12 +25,12 @@
         android:text="nombrelote"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/actLoteImage" />
 
     <TextView
         android:id="@+id/actLoteCompleteDescTextView"
         android:layout_width="330dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="descripcionCompleta"
         android:textSize="16sp"
