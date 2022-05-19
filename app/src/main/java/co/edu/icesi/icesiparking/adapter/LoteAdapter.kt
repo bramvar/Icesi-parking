@@ -33,4 +33,10 @@ class LoteAdapter: RecyclerView.Adapter<LoteVH>() {
         lotes.add(lote)
         notifyItemInserted(lotes.size-1)
     }
+
+    fun clear() {
+        val size = lotes.size
+        lotes.clear()
+        notifyItemRangeRemoved(0,size)
+    }
 }

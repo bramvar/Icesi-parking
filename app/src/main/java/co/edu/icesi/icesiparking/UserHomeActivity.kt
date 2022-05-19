@@ -34,17 +34,27 @@ class UserHomeActivity : AppCompatActivity() {
         binding.lotesRecycler.layoutManager = LinearLayoutManager(this)
         binding.lotesRecycler.setHasFixedSize(true)
 
-        Firebase.firestore.collection("lotes").get()
-            .addOnCompleteListener { lote ->
-                for(doc in lote.result!!){
-                    val lote = doc.toObject(Lote::class.java)
-                    adapter.addLote(lote)
-                }
-            }
+        getLotes()
 
         binding.userSettingsButton.setOnClickListener {
             startActivity(Intent(this,SettingsActivity::class.java))
         }
+
+        binding.lotesRefreshSRL.setOnRefreshListener {
+            getLotes()
+        }
+    }
+
+    fun getLotes(){
+        Firebase.firestore.collection("lotes").get()
+            .addOnCompleteListener { lote ->
+                adapter.clear()
+                for(doc in lote.result!!){
+                    val lote = doc.toObject(Lote::class.java)
+                    adapter.addLote(lote)
+                }
+                binding.lotesRefreshSRL.isRefreshing = false
+            }
     }
 
     fun getUpdatedUser(){
