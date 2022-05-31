@@ -7,6 +7,7 @@
     tools:context=".UserHomeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="225dp"
         android:background="#33568A"
@@ -69,4 +70,21 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/setting_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/lotesRefreshSRL"
+        android:layout_width="416dp"
+        android:layout_height="509dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lotesRecycler"
+            android:layout_width="409dp"
+            android:layout_height="504dp"
+            android:layout_marginTop="8dp" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

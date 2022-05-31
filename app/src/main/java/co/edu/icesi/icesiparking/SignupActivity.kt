@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import co.edu.icesi.icesiparking.databinding.ActivitySignupBinding
+import co.edu.icesi.icesiparking.model.User
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -40,7 +41,7 @@ class SignupActivity : AppCompatActivity() {
                 Firebase.auth.createUserWithEmailAndPassword(email,password)
                     .addOnSuccessListener {
                         val id = Firebase.auth.currentUser?.uid
-                        val newUser = User(id!!,userName,userLastname,email,password)
+                        val newUser = User(id!!,userId,userName,userLastname,email,password)
 
                         Firebase.firestore.collection("users").document(id).set(newUser)
                             .addOnSuccessListener {
